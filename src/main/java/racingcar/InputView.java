@@ -13,6 +13,21 @@ public class InputView {
         return names;
     }
 
+    public int getCount() {
+        System.out.println("시도할 회수는 몇회인가요?");
+        String input = Console.readLine(); //처음부터 int로 받는 것보다 String으로 받고 int로 바꾸는게 더 정확함
+        try {
+            int count = Integer.parseInt(input);
+            if (count <= 0) {
+                throw new IllegalArgumentException("시도 횟수는 0보다 커야 합니다.");
+            }
+            return count;
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("시도 횟수는 숫자여야 합니다.");
+        }
+    }
+
+
     private void validateCarNames(String[] names) {
         List<String> nameList = new ArrayList<>();
 
@@ -21,20 +36,21 @@ public class InputView {
             if(name.contains(" ")) {
                 throw new IllegalArgumentException("자동차 이름에는 공백이 포함될 수 없습니다.");
             }
+            // 이름이 비어있는지 확인
             String trimmedName = name.trim();
             if (trimmedName.isEmpty()) {
                 throw new IllegalArgumentException("자동차 이름은 빈 값일 수 없습니다.");
             }
-
+            // 5자가 넘는지 확인
             if (trimmedName.length() > 5) {
                 throw new IllegalArgumentException("자동차 이름은 5자 이하만 가능합니다.");
             }
-
+            // 이미 나온 이름인지 확인 (중복 체크)
             if (nameList.contains(name)) {
                 throw new IllegalArgumentException("중복된 이름이 있습니다.");
             }
 
-            nameList.add(name);
+            nameList.add(name); // 검사를 통과한 이름은 리스트에 보관
         }
     }
 }
