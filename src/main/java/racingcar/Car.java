@@ -18,12 +18,4 @@ public class Car {
     public int getPosition() {
         return position;
     }
-
-    public String setName(String name) {
-        return this.name = name;
-    }
-
-    public int setPosition(int position) {
-        return this.position = position;
-    }
 }
