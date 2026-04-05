@@ -36,14 +36,21 @@ public class GameController {
     }
 
     private List<String> findWinners() {
-        // 가장 멀리 간 자동차의 위치 확인
+        int maxPosition = getMaxPosition();
+        return getWinnersNames(maxPosition);
+    }
+
+    private int getMaxPosition() {
         int maxPosition = 0;
         for (Car car : cars) {
             if (car.getPosition() > maxPosition) {
                 maxPosition = car.getPosition();
             }
         }
-        //위에서 찾은 최고 기록과 똑같은 위치에 있는 자동차 이름을 다 모음.
+        return maxPosition;
+    }
+
+    private List<String> getWinnersNames(int maxPosition) {
         List<String> winners = new ArrayList<>();
         for (Car car : cars) {
             if (car.getPosition() == maxPosition) {
